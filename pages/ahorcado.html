@@ -70,11 +70,52 @@
       font-size: 60px;
       text-transform: uppercase;
     }
+
+    #btnAyuda {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 5px;
+      background-color: #ff9800;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .popup-contenido {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    .popup-contenido h2 {
+        margin-top: 0;
+    }
+
+    .popup-contenido button {
+        margin-top: 10px;
+    }
+
+
   </style>
 </head>
 <body>
   <header>
     <h1>Juedo del Ahorcado</h1>
+    <button id="btnAyuda" onclick="mostrarPopup()">Ayuda</button>
   </header>
   <div id="hangman" class="hangman">
     <img src="hangman0.png" alt="Ahorcado">
@@ -88,7 +129,18 @@
   <p id="result"></p>
   <div id="lettersUsed"></div>
   
-
+  <div id="miPopup" class="popup">
+    <div class="popup-contenido">
+        <h2>¿Cómo se juega?</h2>
+        <p>
+            Escribe una letra y pulsa en 'Comprobar'.<br/>
+            Tienes 6 intentos.<br/>
+            Las letras que no estén aparecerán abajo.<br/><br/>
+            ¡Suerte!
+        </p>
+        <button id="btnAyuda" onclick="cerrarPopup()">Cerrar</button>
+    </div>
+</div>
 
   <script>
 
@@ -283,6 +335,35 @@
     }
 
     initializeGame();
+
+
+    // AYUDA
+
+    function mostrarPopup() {
+      var popup = document.getElementById("miPopup");
+      popup.style.display = "flex";
+  }
+
+  function cerrarPopup() {
+      var popup = document.getElementById("miPopup");
+      popup.style.display = "none";
+  }
+
+  function calcularLetraDNI() {
+      var num = document.getElementById("a").value.toString();
+      var letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
+
+      if (esError(num)) {
+          var posicion = num % 23;
+          var letra = letras.charAt(posicion);
+          var dniResultDiv = document.getElementById("b");
+          dniResultDiv.textContent = "La letra del DNI es: " + letra; 
+          dniResultDiv.classList.remove("error");
+      }
+
+      
+  }
+
   </script>
 </body>
 </html>
