@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Calculadora</title>
+    
     <style>
         body {
             background-color: #f5f5f5;
@@ -13,7 +14,7 @@
             color: #fff;
             padding: 20px;
             text-align: center;
-            margin-bottom: 5%;
+            margin-bottom: 2%;
         }
 
         .container {
@@ -73,11 +74,51 @@
         .button.operator:hover {
             background-color: #f57c00;
         }
+
+        #btnAyuda {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-contenido {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .popup-contenido h2 {
+            margin-top: 0;
+        }
+
+        .popup-contenido button {
+            margin-top: 10px;
+        }
+
     </style>
 </head>
 <body>
     <header>
         <h1>Calculadora</h1>
+        <button id="btnAyuda" onclick="mostrarPopup()">Ayuda</button>
     </header>
   <div class="container">
     <input type="text" id="result" readonly>
@@ -101,6 +142,16 @@
     <button class="button" onclick="appendCharacter('.')">.</button>
     <button class="button operator" onclick="calculateResult()">=</button>
   </div>
+
+  <div id="miPopup" class="popup">
+    <div class="popup-contenido">
+        <h2>¿Cómo se juega?</h2>
+        <p>
+            Es una calculadora básica.
+        </p>
+        <button id="btnAyuda" onclick="cerrarPopup()">Cerrar</button>
+    </div>
+</div>
 
     <script>
 
@@ -127,6 +178,32 @@
           }
       }
 
+     // AYUDA
+
+     function mostrarPopup() {
+            var popup = document.getElementById("miPopup");
+            popup.style.display = "flex";
+        }
+
+        function cerrarPopup() {
+            var popup = document.getElementById("miPopup");
+            popup.style.display = "none";
+        }
+
+        function calcularLetraDNI() {
+            var num = document.getElementById("a").value.toString();
+            var letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
+
+            if (esError(num)) {
+                var posicion = num % 23;
+                var letra = letras.charAt(posicion);
+                var dniResultDiv = document.getElementById("b");
+                dniResultDiv.textContent = "La letra del DNI es: " + letra; 
+                dniResultDiv.classList.remove("error");
+            }
+
+            
+        }
 
     </script>
 </body>
