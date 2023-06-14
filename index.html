@@ -1,40 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="images/logo.png">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Home | Guillermo Polán Ruiz</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <title>Inicio de Sesión</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .container h2 {
+      text-align: center;
+      color: #ff9800;
+      margin-bottom: 20px;
+    }
+    
+    .container input[type="text"],
+    .container input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      outline: none;
+    }
+    
+    .container input[type="submit"] {
+      width: 100%;
+      background-color: #ff9800;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    
+    .container input[type="submit"]:hover {
+      background-color: #ffab40;
+    }
+    
+    .container p {
+      text-align: center;
+      margin-top: 15px;
+    }
+    
+    .container p a {
+      color: #ff9800;
+      text-decoration: none;
+    }
+
+    #error{
+        margin-top: 5%;
+        color: red;
+        font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Home</h1>
-    </header>
+  <div class="container">
+    <h2>Iniciar Sesión</h2>
+    <form action="inicio.html" onsubmit="return verificarCredenciales()">
+      <input type="text" id="username" placeholder="Usuario" required>
+      <input type="password" id="password" placeholder="Contraseña" required>
+      <input type="submit" value="Entrar">
+    </form>
+    <div id="error"></div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha256.js"></script>
+    <script>
+      
+      function verificarCredenciales() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
 
-    <a href="pages/downloadMP3MP4.html">
-        <div class="row color-row1">
-            <h2>Descargar MP3 o MP4 de YouTube</h2>
-        </div>
-    </a>
+      var hash = CryptoJS.SHA256(password);
 
-    <a href="pages/ahorcado.html">
-        <div class="row color-row1">
-            <h2>Ahorcado</h2>
-        </div>
-    </a>
-
-    <a href="pages/calculadora.html">
-        <div class="row color-row2">
-            <h2>Calculadora</h2>
-        </div>
-    </a>
-
-    <a href="pages/adivinarDNI.html">
-        <div class="row color-row3">
-            <h2>Adivinar DNI</h2>
-        </div>
-    </a>
+      if (username == 'admin' && hash == '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918') {
+        window.location.href="index.html";
+        return true;
+      } else {
+        var error = document.getElementById('error');
+        error.innerHTML = '*Usuario o contraseña incorrecto.';
+        return false;
+      }
+    }
+    </script>
 </body>
 </html>
