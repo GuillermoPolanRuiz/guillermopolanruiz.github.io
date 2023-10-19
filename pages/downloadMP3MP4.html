@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <title>Descargar | Guillermo Polán Ruiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    
+    header {
+            background-color: #ff9800;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+    
+    h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    
+    #buttonContainer {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+
+    #textboxContainer{
+        margin-top: 5%;
+    }
+    
+    .button {
+      display: inline-block;
+      background-color: #ff9800;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    
+    .button:hover {
+      background-color: #fdbd5d;
+    }
+    
+    .iframeContainer {
+      margin-top: 20px;
+    }
+    
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+    }
+
+    #textbox {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .popup-contenido {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    .popup-contenido h2 {
+        margin-top: 0;
+    }
+
+    .popup-contenido button {
+        margin-top: 10px;
+    }
+
+    #btnPopup {
+        display: block;
+        margin: 10px auto;
+        padding: 10px 20px;
+        font-size: 18px;
+        border-radius: 5px;
+        background-color: #ff9800;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Descarga en MP3 o MP4 de YouTube</h1>
+  </header>
+  
+  <div id="textboxContainer">
+    <input type="text" id="textbox" placeholder="Introduce una url">
+  </div>
+
+  <div id="buttonContainer">
+    <button class="button" id="button1">MP3</button>
+    <button class="button" id="button2">MP4</button>
+  </div>
+
+  <div class="iframeContainer">
+    <iframe id="iframe1" width="100%" height="100%" allowtransparency="true" scrolling="no" style="border:none"></iframe>
+  </div>
+
+  <div id="errors"></div>
+    
+  <div id="miPopup" class="popup">
+    <div class="popup-contenido">
+        <h2>IMPORTANTE</h2>
+        <p>
+            Al clicar en 'Convert', se va a abrir una ventana nueva, <b>ciérrala y vuelve a clicar</b>.<br>
+            Son anuncios innecesarios.
+        </p>
+        <button id="btnPopup" onclick="cerrarPopup()">Aceptar</button>
+    </div>
+  </div>
+  <script>
+    const button1 = document.getElementById('button1');
+    const button2 = document.getElementById('button2');
+    const iframe1 = document.getElementById('iframe1');
+    
+    var c = 0;
+
+    button1.addEventListener('click', () => {
+        var tbUrl = document.getElementById("textbox").value.toString();
+        iframe1.src = 'https://convert2mp3s.com/api/single/mp3?url=' + tbUrl;
+        if (c == 0) {
+            mostrarPopup();
+            c = c + 1;
+        }
+    });
+    
+    button2.addEventListener('click', () => {
+        var tbUrl = document.getElementById("textbox").value.toString();
+        iframe1.src = 'https://convert2mp3s.com/api/single/mp4?url=' + tbUrl;
+        if (c == 0) {
+            mostrarPopup();
+            c = c + 1;
+        }
+    });
+
+
+    function mostrarPopup() {
+        var popup = document.getElementById("miPopup");
+        popup.style.display = "flex";
+    }
+
+    function cerrarPopup(mp) {
+        var popup = document.getElementById("miPopup");
+        popup.style.display = "none";
+    }
+
+  </script>
+</body>
+</html>
+

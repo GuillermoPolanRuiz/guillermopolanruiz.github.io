@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <title>Calcuadora | Guillermo Polán Ruiz</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #ff9800;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 2%;
+        }
+
+        .container {
+            margin-top: 50px;
+            max-width: 300px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #result {
+            height: 60px;
+            font-size: 28px;
+            text-align: right;
+            margin-bottom: 20px;
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .button {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #eee;
+            cursor: pointer;
+        }
+
+        .buttonDisable{
+          width: 50px;
+            height: 50px;
+            font-size: 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #ccc;
+        }
+
+        .button.operator {
+            background-color: #ff9800;
+            color: #fff;
+        }
+
+        .button.operator:hover {
+            background-color: #f57c00;
+        }
+
+        #btnAyuda {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-contenido {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .popup-contenido h2 {
+            margin-top: 0;
+        }
+
+        .popup-contenido button {
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Calculadora</h1>
+        <button id="btnAyuda" onclick="mostrarPopup()">Ayuda</button>
+    </header>
+  <div class="container">
+    <input type="text" id="result" readonly>
+    <button class="buttonDisable" onclick="clearResult()"></button>
+    <button class="button" onclick="clearResult()">C</button>
+    <button class="button" onclick="deleteLastCharacter()">&larr;</button>
+    <button class="button operator" onclick="appendCharacter('/')">/</button>
+    <button class="button" onclick="appendCharacter('7')">7</button>
+    <button class="button" onclick="appendCharacter('8')">8</button>
+    <button class="button" onclick="appendCharacter('9')">9</button>
+    <button class="button operator" onclick="appendCharacter('*')">*</button>
+    <button class="button" onclick="appendCharacter('4')">4</button>
+    <button class="button" onclick="appendCharacter('5')">5</button>
+    <button class="button" onclick="appendCharacter('6')">6</button>
+    <button class="button operator" onclick="appendCharacter('-')">-</button>
+    <button class="button" onclick="appendCharacter('1')">1</button>
+    <button class="button" onclick="appendCharacter('2')">2</button>
+    <button class="button" onclick="appendCharacter('3')">3</button>
+    <button class="button operator" onclick="appendCharacter('+')">+</button>
+    <button class="button" onclick="appendCharacter('0')">0</button>
+    <button class="button" onclick="appendCharacter('.')">.</button>
+    <button class="button operator" onclick="calculateResult()">=</button>
+  </div>
+
+  <div id="miPopup" class="popup">
+    <div class="popup-contenido">
+        <h2>¿Cómo se juega?</h2>
+        <p>
+            Es una calculadora básica.
+        </p>
+        <button id="btnAyuda" onclick="cerrarPopup()">Cerrar</button>
+    </div>
+</div>
+
+    <script>
+
+      let result = document.getElementById('result');
+
+      function appendCharacter(character) {
+          result.value += character;
+      }
+
+      function clearResult() {
+          result.value = '';
+      }
+
+      function deleteLastCharacter() {
+          result.value = result.value.slice(0, -1);
+      }
+
+      function calculateResult() {
+          try {
+              let calculation = eval(result.value);
+              result.value = calculation;
+          } catch (error) {
+              result.value = 'Error';
+          }
+      }
+
+     // AYUDA
+
+     function mostrarPopup() {
+            var popup = document.getElementById("miPopup");
+            popup.style.display = "flex";
+        }
+
+        function cerrarPopup() {
+            var popup = document.getElementById("miPopup");
+            popup.style.display = "none";
+        }
+
+        function calcularLetraDNI() {
+            var num = document.getElementById("a").value.toString();
+            var letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
+
+            if (esError(num)) {
+                var posicion = num % 23;
+                var letra = letras.charAt(posicion);
+                var dniResultDiv = document.getElementById("b");
+                dniResultDiv.textContent = "La letra del DNI es: " + letra; 
+                dniResultDiv.classList.remove("error");
+            }
+
+            
+        }
+
+    </script>
+</body>
+</html>
