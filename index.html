@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <title>Inicio de Sesión</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .container h2 {
+      text-align: center;
+      color: #ff9800;
+      margin-bottom: 20px;
+    }
+    
+    .container input[type="text"],
+    .container input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      outline: none;
+    }
+    
+    .container input[type="submit"] {
+      width: 100%;
+      background-color: #ff9800;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    
+    .container input[type="submit"]:hover {
+      background-color: #ffab40;
+    }
+    
+    .container p {
+      text-align: center;
+      margin-top: 15px;
+    }
+    
+    .container p a {
+      color: #ff9800;
+      text-decoration: none;
+    }
+
+    #error{
+        margin-top: 5%;
+        color: red;
+        font-weight: bold;
+    }
+    .enlace-descarga {
+      text-decoration: none; /* Quitar subrayado */
+      color: #ff9800; /* Cambiar el color del texto */
+      background-color: #f0f0f0; /* Cambiar el color de fondo */
+      padding: 10px; /* Agregar espaciado interno */
+      border-radius: 5px; /* Agregar bordes redondeados */
+      border: 1px solid #ccc; /* Agregar borde */
+      font-weight: bold; /* Hacer el texto en negrita */
+      margin-left: 10%;
+      transition: background-color 0.3s, color 0.3s; /* Agregar transiciones suaves */
+    }
+
+    /* Cambiar los estilos cuando el cursor se coloca sobre el enlace */
+    .enlace-descarga:hover {
+      background-color: #ff9800; /* Cambiar el color de fondo en el hover */
+      color: #fff; /* Cambiar el color del texto en el hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Iniciar Sesión</h2>
+    <form action="inicio.html" onsubmit="return verificarCredenciales()">
+      <input type="text" id="username" placeholder="Usuario" required>
+      <input type="password" id="password" placeholder="Contraseña" required>
+      <input type="submit" value="Entrar">
+    </form>
+    <div id="error"></div>
+  </div>
+  <br/>
+  <div class="container">
+    <a class="enlace-descarga" href="download/AplicaciónMeteorológica.zip" download>Descargar Programa AEMET</a>
+  </div>
+  <br/>
+  <div class="container">
+    <a class="enlace-descarga" href="download/AppRI_18102023.apk" download>Descargar App Máquinas</a>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/sha256.js"></script>
+    <script>
+      
+      function verificarCredenciales() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      var hash = CryptoJS.SHA256(password);
+
+      if (username == 'admin' && hash == '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918') {
+        window.location.href="index.html";
+        return true;
+      } else {
+        var error = document.getElementById('error');
+        error.innerHTML = '*Usuario o contraseña incorrecto.';
+        return false;
+      }
+    }
+    </script>
+</body>
+</html>
