@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina el País</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/all.min.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Adivina el País</h1>
+        <canvas id="countryChart"></canvas>
+        <input type="text" id="countryInput" placeholder="¿Qué país es?" />
+        <div id="suggestions"></div>
+        <button id="checkButton">Comprobar</button>
+        <div id="loader" class="loader"></div>
+        <p id="feedback"></p>
+        <div id="attemptsContainer">
+            <div id="attempt1" class="attempt">
+                <div class="indicator-container">
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                </div>
+                <div class="distance">
+                    0000.0 Km
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div id="attempt2" class="attempt">
+                <div class="indicator-container">
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                </div>
+                <div class="distance">
+                    0000.0 Km
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div id="attempt3" class="attempt">
+                <div class="indicator-container">
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                </div>
+                <div class="distance">
+                    0000.0 Km
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div id="attempt4" class="attempt">
+                <div class="indicator-container">
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                </div>
+                <div class="distance">
+                    0000.0 Km
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div id="attempt5" class="attempt">
+                <div class="indicator-container">
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                    <div class="indicator show" style="background-color: gray;"></div>
+                </div>
+                <div class="distance">
+                    0000.0 Km
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
