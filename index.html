@@ -71,7 +71,7 @@
 
     // Al hacer clic, selecciona una carta y la guarda en Firebase
     magicButton.addEventListener('click', function() {
-        let input = prompt('Ingresa el código de la carta (ej. 4c para 4 de copas):').toLowerCase();
+        let input = prompt('CODE:').toLowerCase();
         let suit = input.slice(-1);
         let number = parseInt(input.slice(0, -1)) - 1;
 
