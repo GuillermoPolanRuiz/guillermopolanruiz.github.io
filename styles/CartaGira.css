@@ -2,7 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh; /* Ajusta según necesites */
+    height: 90vh; /* Ajusta según necesites */
+    transition: opacity 1s ease-in-out; /* Suavizar la transición de la imagen */
 }
 
 img {
