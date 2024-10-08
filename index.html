@@ -3,101 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Truco de Magia con Cartas</title>
-    <style>
-        #magicButton {
-            position: absolute;
-            bottom: 50px;
-            left: 50px;
-            opacity: 0;
-        }
-        #cardImage {
-            width: 96px; /* Ancho de una carta */
-            height: 130px; /* Altura de una carta */
-            background: url('imagen.png') no-repeat;
-            margin: 20px auto;
-            background-size: 1152px 640px; /* Tamaño total de la hoja de sprites */
-        }
-    </style>
+    <link rel="stylesheet" href="styles/index.css">
+    <title>Magia</title>
 </head>
 <body>
-    <button id="magicButton">Haz Magia</button>
-    <div id="cardImage"></div>
+    <header>
+        <h1>Magia by Guille</h1>
+        <br>
+        <button id="selectCardButton">Seleccionar Carta</button>
+    </header>
+    <main>
+        <div id="cardPopup" class="popup">
+            <div class="popup-content">
+                <span class="close" id="closePopup">&times;</span>
+                <h2>Selecciona una carta</h2>
+                <input type="text" id="cardInput" placeholder="Ingresa la carta (Num y Diamonds, Hearts, Spades, Clubs)" />
+                <button id="submitCard">Enviar</button>
+            </div>
+        </div>
+        <div class="grid-container">
+            <div class="card" onclick="location.href='Trucos/CartaGira.html'">
+                <h2>Carta girada</h2>
+                <p>La carta aparece del revés y al pasar 20 segundos se da la vuelta. Aprovachar ese tiempo para girar el movil...</p>
+            </div>
+            <div class="card" onclick="location.href='Trucos/truco2.html'">
+                <h2>Truco 2</h2>
+                <p>Descripción breve del truco 2.</p>
+            </div>
+            <!-- Agrega más tarjetas aquí -->
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Guillermo Polán Ruiz</p>
+    </footer>
 
-</body>
+    <!-------------------------- SCRIPT ----------------------------->
 
-<script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
-    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
 
-    // // Importar funciones de Firebase
-    // const { initializeApp } = firebase;
-    // const { getDatabase, ref, set, onValue } = firebase.database;
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-  
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDvW35OmXCZEx-q8oJpI5_C-lq_hUoK01o",
-      authDomain: "trucomagia-83825.firebaseapp.com",
-      projectId: "trucomagia-83825",
-      storageBucket: "trucomagia-83825.appspot.com",
-      messagingSenderId: "436279248231",
-      appId: "1:436279248231:web:2cc0ee74924dc035751bc2",
-      measurementId: "G-R14YV492DC"
-    };
-  
-    // Inicializar Firebase
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-
-    const cardImage = document.getElementById('cardImage');
-    const magicButton = document.getElementById('magicButton');
-
-    // Escuchar cambios en la carta seleccionada
-    const cardRef = ref(database, 'selectedCard');
-        onValue(cardRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                let x = data.number * -96;
-                let y = data.suit * -130;
-                cardImage.style.backgroundPosition = `${x}px ${y}px`;
-                document.getElementById('cardImage').style.display = "block";
-            }
-        });
-
-    // Al hacer clic, selecciona una carta y la guarda en Firebase
-    magicButton.addEventListener('click', function() {
-        let input = prompt('CODE:').toLowerCase();
-        let suit = input.slice(-1);
-        let number = parseInt(input.slice(0, -1)) - 1;
-
-        let suits = {
-            'o': 0,
-            'c': 1,
-            'e': 2,
-            'b': 3
+        // Configura tu Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvW35OmXCZEx-q8oJpI5_C-lq_hUoK01o",
+            authDomain: "trucomagia-83825.firebaseapp.com",
+            projectId: "trucomagia-83825",
+            storageBucket: "trucomagia-83825.appspot.com",
+            messagingSenderId: "436279248231",
+            appId: "1:436279248231:web:2cc0ee74924dc035751bc2",
+            measurementId: "G-R14YV492DC"
         };
 
-        if (suits[suit] !== undefined && number >= 0 && number < 12) {
-            set(cardRef, {
-                suit: suits[suit],
-                number: number
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        document.getElementById('selectCardButton').onclick = function() {
+            document.getElementById('cardPopup').style.display = 'block';
+        };
+
+        document.getElementById('closePopup').onclick = function() {
+            document.getElementById('cardPopup').style.display = 'none';
+        };
+
+        document.getElementById('submitCard').onclick = function() {
+            const cardValue = document.getElementById('cardInput').value;
+
+            // Guardar en Firebase
+            const cardsRef = ref(db, 'cartas/');
+            push(cardsRef, {
+                carta: cardValue,
+                timestamp: Date.now()
             });
-        } else {
-            alert('Código no válido. Inténtalo de nuevo.');
-        }
-    });
+            document.getElementById('cardPopup').style.display = 'none';
+        };
+
+        // Cierra el popup si el usuario hace clic fuera de él
+        window.onclick = function(event) {
+            if (event.target === document.getElementById('cardPopup')) {
+                document.getElementById('cardPopup').style.display = 'none';
+            }
+        };
 
 
-    window.addEventListener("load", (event) => {
-        document.getElementById('cardImage').style.display = "none";
-    });
-
-  </script>
-
-
+    </script>
+</body>
 </html>
