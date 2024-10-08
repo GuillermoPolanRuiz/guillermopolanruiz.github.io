@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/CartaGira.css">
+    <title>Truco Carta Girada</title>
+</head>
+<body>
+    <main>
+        <div class="card-container">
+            <img id="cardImage" src="../images/cards/back.svg" alt="Carta Dada la Vuelta">
+        </div>
+    </main>
+
+    <!-------------------------- SCRIPT ----------------------------->
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+        import { getDatabase, ref, push, onValue} from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+
+        // Inicializa Firebase (usa tu configuración existente)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvW35OmXCZEx-q8oJpI5_C-lq_hUoK01o",
+            authDomain: "trucomagia-83825.firebaseapp.com",
+            projectId: "trucomagia-83825",
+            storageBucket: "trucomagia-83825.appspot.com",
+            messagingSenderId: "436279248231",
+            appId: "1:436279248231:web:2cc0ee74924dc035751bc2",
+            measurementId: "G-R14YV492DC"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Función para obtener la última carta guardada
+        const getLastCard = () => {
+            const cardsRef = ref(db, 'cartas/');
+            onValue(cardsRef, (snapshot) => {
+                const cards = snapshot.val();
+                if (cards) {
+                    const cardKeys = Object.keys(cards);
+                    const lastCard = cards[cardKeys[cardKeys.length - 1]].carta; // Última carta guardada
+                    showCard(lastCard);
+                }
+            });
+        };
+
+        // Función para mostrar la carta
+        const showCard = (card) => {
+            const cardImage = document.getElementById('cardImage');
+            const cardSrc = `../images/cards/${card}.svg`; // Suponiendo que el formato de la carta es el mismo que el nombre del archivo
+            setTimeout(() => {
+                cardImage.src = cardSrc; // Cambiar la imagen de la carta
+                cardImage.style.opacity = '1'; // Hacerla visible
+            }, 20000); // Esperar 20 segundos
+        };
+
+        getLastCard();
+
+    </script>
+</body>
+</html>
