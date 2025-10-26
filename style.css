@@ -150,13 +150,93 @@ section { padding:6rem 2rem; }
 
 
 
-/* Blog */
-#blog { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; }
-.blog-post { background:#222; border-radius:15px; overflow:hidden; transition:0.3s; cursor:pointer; }
-.blog-post img { width:100%; object-fit:cover; }
-.blog-post .content { padding:1.5rem; }
-.blog-post h4 { color:#fff; margin-bottom:0.5rem; }
-.blog-post p { color:#ccc; font-size:0.95rem; }
+/* Testimonios */
+#blog {
+  text-align: center;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+  padding: 6rem 2rem;
+}
+
+.testimonios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* más ancho */
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonio {
+  position: relative;
+  background: #1a1a1a;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+}
+
+.testimonio:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 30px rgba(255,255,255,0.15);
+}
+
+.testimonio img {
+  width: 100%;
+  height: auto; /* mantiene proporción original */
+  display: block;
+  border-radius: 15px;
+  filter: brightness(0.95);
+  transition: filter 0.3s ease;
+}
+
+.testimonio:hover img {
+  filter: brightness(1.1);
+}
+
+/* Enlace inferior */
+.opiniones-link {
+  margin-top: 3rem;
+  font-size: 1.1rem;
+  color: #ddd;
+}
+
+.opiniones-link a {
+  color: #a8a8ff;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.opiniones-link a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px #a8a8ff;
+}
+
+/* Animación suave */
+.testimonio {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s ease forwards;
+}
+
+.testimonio:nth-child(1) { animation-delay: 0.2s; }
+.testimonio:nth-child(2) { animation-delay: 0.4s; }
+.testimonio:nth-child(3) { animation-delay: 0.6s; }
+.testimonio:nth-child(4) { animation-delay: 0.8s; }
+.testimonio:nth-child(5) { animation-delay: 1s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .testimonios-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* Contacto */
 #contact .contact-info {
