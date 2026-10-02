@@ -1,0 +1,67 @@
+/* Página Shows */
+.shows-page {
+  position: relative;
+  z-index: 1;
+  padding: 9rem 2rem 6rem;
+}
+
+.shows-page .section-header { margin-bottom: 4rem; }
+
+/* El contenedor mide lo mismo que la imagen, así el marco dorado se ajusta a ella */
+.show .about-image-wrap {
+  width: min(100%, 440px);
+  justify-self: center;
+}
+
+.show .about-image-wrap img {
+  width: 100%;
+  max-width: none;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  filter: none;
+}
+
+.show .about-image-border {
+  top: 16px; left: 16px;
+  right: -16px; bottom: -16px;
+}
+
+.show .about-image-wrap:hover .about-image-border {
+  top: 10px; left: 10px;
+  right: -10px; bottom: -10px;
+}
+
+.show-details {
+  display: flex;
+  gap: 3rem;
+  margin: 0 0 2.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--gold-border);
+  border-bottom: 1px solid var(--gold-border);
+}
+
+.show-details dt {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+
+.show-details dd {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--white);
+}
+
+.show-btn { opacity: 1; animation: none; }
+
+@media (max-width: 900px) {
+  .show-details { justify-content: center; }
+}
+
+@media (max-width: 768px) {
+  .shows-page { padding: 7rem 1.5rem 4rem; }
+}

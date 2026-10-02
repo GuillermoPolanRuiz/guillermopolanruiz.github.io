@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shows | Guille Magic | El poder de la ilusión</title>
+<meta name="description" content="El poder de la ilusión: espectáculo de magia de cerca de Guille Magic. Consulta duración, aforo y compra tus entradas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="shows.css">
+<link rel="icon" type="image/x-icon" href="images/logo.ico">
+</head>
+<body>
+
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+<canvas id="particles"></canvas>
+
+<!-- Header -->
+<header id="header">
+  <a href="index.html" class="logo-container">
+    <img src="images/logo.png" alt="Logo Guille Magic" class="header-logo">
+    <span class="logo-text">Guille Magic</span>
+  </a>
+  <nav>
+    <a href="index.html#services" class="nav-link">Servicios</a>
+    <a href="shows.html" class="nav-link">Shows</a>
+    <a href="index.html#blog" class="nav-link">Testimonios</a>
+    <a href="index.html#contact" class="nav-link nav-cta">Contacto</a>
+  </nav>
+  <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#services" onclick="closeMobileMenu()">Servicios</a>
+  <a href="shows.html" onclick="closeMobileMenu()">Shows</a>
+  <a href="index.html#blog" onclick="closeMobileMenu()">Testimonios</a>
+  <a href="index.html#contact" onclick="closeMobileMenu()">Contacto</a>
+</div>
+
+<!-- Show -->
+<main class="shows-page">
+  <div class="section-header">
+    <div class="section-label">Próximamente</div>
+    <h1 class="section-heading">Shows</h1>
+    <p class="section-desc">Espectáculos con entrada para vivir la magia de cerca</p>
+  </div>
+
+  <article class="about-inner show">
+    <div class="about-image-wrap">
+      <img src="images/ElPoderDeLaIlusion.png" alt="Portada del show El poder de la ilusión">
+      <div class="about-image-border"></div>
+    </div>
+    <div class="about-text">
+      <div class="section-label">Magia de cerca</div>
+      <h2 class="section-heading">El poder<br><em>de la ilusión</em></h2>
+      <p>
+        La magia sucede a centímetros de tus ojos.
+
+Un espectáculo cercano, elegante y sorprendente en el que las cartas, los objetos cotidianos y la mente humana se convierten en protagonistas. Una experiencia pensada para que cada espectador no solo vea la magia, sino que la viva en sus propias manos.
+No se trata solo de ver magia. Se trata de preguntarse durante días: “¿Cómo lo ha hecho?”
+    </p>
+
+      <dl class="show-details">
+        <div>
+          <dt>Duración</dt>
+          <dd>60 minutos</dd>
+        </div>
+        <div>
+          <dt>Aforo</dt>
+          <dd>30 personas</dd>
+        </div>
+      </dl>
+
+      <a href="https://TU-ENLACE-DE-ENTRADAS" target="_blank" rel="noopener" class="hero-btn show-btn">
+        <span>Comprar entradas</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+      </a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="images/logo.png" alt="Guille Magic">
+      <span>Guille Magic</span>
+    </div>
+    <div class="footer-divider">◆</div>
+    <p class="footer-copy">&copy; 2026 Guille Magic. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
